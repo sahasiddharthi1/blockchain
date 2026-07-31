@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ledgerforge
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      LF_ENV: development
+      LF_HTTP_PORT: "8080"
+      LF_MONGO_URI: mongodb://mongo:27017
+      LF_MONGO_DB: ledgerforge
+      LF_JWT_SECRET: change-me-in-prod
+      LF_MINING_DIFFICULTY: "4"
+      LF_DASHBOARD_ORIGIN: http://localhost:5173
+    depends_on:
+      - mongo
+
+  dashboard:
+    build:
+      context: ./frontend/dashboard
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE_URL: http://localhost:8080
+      VITE_WS_URL: ws://localhost:8080/api/v1/ws
+    depends_on:
+      - api
+
+  marketing:
+    build:
+      context: ./marketing
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+
+volumes:
+  mongo-data:

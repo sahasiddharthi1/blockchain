@@ -1,0 +1,14 @@
+# Go
+backend/data/
+*.tmp
+
+# Node
+node_modules/
+.next/
+dist/
+frontend/dashboard/dist/
+marketing/.next/
+
+# misc
+.env
+.DS_Store

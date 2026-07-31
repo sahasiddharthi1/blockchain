@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b0715;
+  --color-ink-raised: #0e0a1c;
+  --color-ink-overlay: #161128;
+  --color-ink-card: #1b1533;
+  --color-paper: #e8e8ed;
+  --color-paper-muted: #9a9aae;
+  --color-paper-weak: #6a6a7e;
+  --color-signal: #7c5cfc;
+  --color-signal-soft: rgba(124, 92, 252, 0.12);
+  --color-signal-glow: rgba(124, 92, 252, 0.25);
+  --color-border: #1e1e30;
+  --color-border-light: #2a2a40;
+  --color-success: #22c55e;
+  --color-success-soft: rgba(34, 197, 94, 0.12);
+  --color-danger: #ef4444;
+  --color-danger-soft: rgba(239, 68, 68, 0.12);
+  --color-warning: #f59e0b;
+  --color-warning-soft: rgba(245, 158, 11, 0.12);
+  --color-accent-cyan: #22d3ee;
+  --color-accent-purple: #7c5cfc;
+  --color-accent-blue: #4a9eff;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.light {
+  --color-ink: #f1ecfb;
+  --color-ink-raised: #f8f5ff;
+  --color-ink-overlay: #eae2fa;
+  --color-ink-card: #ffffff;
+  --color-paper: #1f1533;
+  --color-paper-muted: #6d5fa7;
+  --color-paper-weak: #8a7bbf;
+  --color-signal: #6956a8;
+  --color-signal-soft: rgba(105, 86, 168, 0.10);
+  --color-signal-glow: rgba(105, 86, 168, 0.20);
+  --color-border: #e6ddfb;
+  --color-border-light: #ddd0f5;
+  --color-success: #87d1a3;
+  --color-success-soft: rgba(135, 209, 163, 0.12);
+  --color-danger: #d94a4a;
+  --color-danger-soft: rgba(217, 74, 74, 0.12);
+  --color-warning: #f47e3f;
+  --color-warning-soft: rgba(244, 126, 63, 0.12);
+  --color-accent-cyan: #8d75e6;
+  --color-accent-purple: #6956a8;
+  --color-accent-blue: #8d75e6;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-light) transparent;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(1100px 700px at 85% -10%, var(--color-signal-glow), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, rgba(34, 211, 238, 0.14), transparent 55%),
+    radial-gradient(600px 500px at 110% 70%, rgba(124, 92, 252, 0.14), transparent 60%);
+  background-attachment: fixed;
+}
+
+.light body {
+  background-image:
+    radial-gradient(1100px 700px at 85% -10%, rgba(105, 86, 168, 0.16), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, rgba(141, 117, 230, 0.14), transparent 55%),
+    radial-gradient(600px 500px at 110% 70%, rgba(105, 86, 168, 0.12), transparent 60%);
+}
+
+::selection {
+  background: var(--color-signal-soft);
+  color: var(--color-paper);
+}
+
+/* ── Background grid overlay ── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(124, 92, 252, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 92, 252, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.light .bg-grid {
+  background-image:
+    linear-gradient(rgba(105, 86, 168, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(105, 86, 168, 0.04) 1px, transparent 1px);
+}
+
+/* ── Sidebar surface ── */
+.sidebar-surface {
+  background: #170e22;
+  border-right: 1px solid rgba(224, 176, 255, 0.14);
+}
+
+.light .sidebar-surface {
+  background: #e4d9f3;
+  border-right: 1px solid #ddd0f5;
+}
+
+/* ── Floating gradient orbs ── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--color-signal), transparent 70%);
+  animation: orb-float 20s ease-in-out infinite;
+  top: -200px;
+  right: -200px;
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--color-accent-cyan), transparent 70%);
+  animation: orb-float 25s ease-in-out infinite reverse;
+  bottom: -100px;
+  left: -100px;
+}
+
+.light .orb { opacity: 0.08; }
+
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -60px) scale(1.1); }
+  66% { transform: translate(-30px, 20px) scale(0.9); }
+}
+
+/* ── Entrance animations ── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out both;
+}
+
+.animate-fade-in-up-1 { animation-delay: 0.05s; }
+.animate-fade-in-up-2 { animation-delay: 0.1s; }
+.animate-fade-in-up-3 { animation-delay: 0.15s; }
+.animate-fade-in-up-4 { animation-delay: 0.2s; }
+.animate-fade-in-up-5 { animation-delay: 0.25s; }
+.animate-fade-in-up-6 { animation-delay: 0.3s; }
+.animate-fade-in-up-7 { animation-delay: 0.35s; }
+.animate-fade-in-up-8 { animation-delay: 0.4s; }
+
+/* ── Card interactive effects ── */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(124, 92, 252, 0.08);
+  border-color: var(--color-signal-soft);
+}
+
+.light .card-hover:hover {
+  box-shadow: 0 8px 32px rgba(105, 86, 168, 0.10);
+}
+
+/* ── Glow pulse for live indicator ── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 6px var(--color-success); }
+  50% { box-shadow: 0 0 18px var(--color-success); }
+}
+
+.glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ── Shimmer loading ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-ink-overlay) 25%,
+    var(--color-ink-card) 50%,
+    var(--color-ink-overlay) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.light .shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-ink-overlay) 25%,
+    var(--color-border) 50%,
+    var(--color-ink-overlay) 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* ── Chart tooltip dark overrides ── */
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
