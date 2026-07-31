@@ -12,3 +12,4 @@ marketing/.next/
 # misc
 .env
 .DS_Store
+.vercel
