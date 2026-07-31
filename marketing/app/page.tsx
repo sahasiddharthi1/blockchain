@@ -8,6 +8,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+const DASHBOARD_URL = "https://blockchain-five-virid.vercel.app";
+
 const LOGOS = [
   "Coinbase", "Databricks", "Reddit", "Snowflake",
   "Dropbox", "Pinterest", "MongoDB", "Sophos", "Canva", "McKesson",
@@ -130,10 +132,10 @@ export default function HomePage() {
             <a href="https://github.com" className="transition-colors hover:text-paper">GitHub</a>
           </div>
           <div className="hidden items-center gap-3 md:flex">
-            <a href="/login" className="rounded-lg border border-line px-4 py-2 text-sm font-medium transition-colors hover:border-slate hover:text-paper">
+            <a href={`${DASHBOARD_URL}/login`} className="rounded-lg border border-line px-4 py-2 text-sm font-medium transition-colors hover:border-slate hover:text-paper">
               Log in
             </a>
-            <a href="/signup" className="rounded-lg bg-signal px-4 py-2 text-sm font-semibold text-ink transition-all hover:bg-signal/90">
+            <a href={`${DASHBOARD_URL}/register`} className="rounded-lg bg-signal px-4 py-2 text-sm font-semibold text-ink transition-all hover:bg-signal/90">
               Sign up free
             </a>
           </div>
@@ -149,8 +151,8 @@ export default function HomePage() {
               <a href="#how-it-works" className="transition-colors hover:text-paper">How it works</a>
               <a href="https://github.com" className="transition-colors hover:text-paper">GitHub</a>
               <div className="flex gap-3 pt-2">
-                <a href="/login" className="flex-1 rounded-lg border border-line px-4 py-2 text-center text-sm font-medium">Log in</a>
-                <a href="/signup" className="flex-1 rounded-lg bg-signal px-4 py-2 text-center text-sm font-semibold text-ink">Sign up</a>
+                <a href={`${DASHBOARD_URL}/login`} className="flex-1 rounded-lg border border-line px-4 py-2 text-center text-sm font-medium">Log in</a>
+                <a href={`${DASHBOARD_URL}/register`} className="flex-1 rounded-lg bg-signal px-4 py-2 text-center text-sm font-semibold text-ink">Sign up</a>
               </div>
             </div>
           </div>
@@ -177,7 +179,7 @@ export default function HomePage() {
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href="/signup"
+              href={`${DASHBOARD_URL}/register`}
               className="group inline-flex items-center gap-2 rounded-xl bg-signal px-7 py-3.5 text-sm font-semibold text-ink transition-all hover:bg-signal/90 hover:shadow-lg hover:shadow-signal/20"
             >
               Get started free
@@ -402,7 +404,7 @@ export default function HomePage() {
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href="/signup"
+              href={`${DASHBOARD_URL}/register`}
               className="group inline-flex items-center gap-2 rounded-xl bg-signal px-7 py-3.5 text-sm font-semibold text-ink transition-all hover:bg-signal/90 hover:shadow-lg hover:shadow-signal/20"
             >
               Get started free
