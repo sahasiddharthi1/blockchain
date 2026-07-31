@@ -11,7 +11,7 @@ export default function SignUpPage() {
     <div className="flex min-h-screen flex-col">
       <nav className="sticky top-0 z-50 border-b border-border bg-ink/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
+            <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-signal to-accent-blue">
               <Blocks className="h-4 w-4 text-white" />
             </div>
