@@ -55,7 +55,7 @@ export default function SignUpPage() {
                 />
               </div>
               <Link
-                href="/register"
+                href="https://ledgerforge-dashboard.vercel.app/register"
                 className="flex w-full items-center justify-center rounded-xl bg-signal px-4 py-2.5 text-sm font-semibold text-ink transition-all hover:bg-signal/90"
               >
                 Go to Registration
