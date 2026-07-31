@@ -21,7 +21,8 @@ export default function RegisterPage() {
             navigate("/dashboard");
         }
         catch (err) {
-            setError(err instanceof Error ? err.message : "Registration failed");
+            const msg = err instanceof Error ? err.message : "Registration failed";
+            setError(msg.includes("already registered") ? "An account with this email already exists. Please sign in instead." : msg);
         }
         finally {
             setLoading(false);
