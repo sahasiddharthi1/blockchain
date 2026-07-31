@@ -55,10 +55,10 @@ export default function LoginPage() {
                 />
               </div>
               <Link
-                href="/login"
+                href="/"
                 className="flex w-full items-center justify-center rounded-xl bg-signal px-4 py-2.5 text-sm font-semibold text-ink transition-all hover:bg-signal/90"
               >
-                Go to Sign In
+                Go to Dashboard
               </Link>
             </div>
           </div>
