@@ -10,7 +10,7 @@ export function AuthenticatedLayout({ children }: { children: ReactNode }) {
       <AppSidebar />
       <div className="relative z-10 flex flex-1 flex-col md:pl-64">
         <AppHeader />
-        <main className="flex-1 p-6 lg:p-8">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">
           {children}
         </main>
       </div>

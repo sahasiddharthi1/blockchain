@@ -1,18 +1,18 @@
-import { Search, Blocks, Menu, X } from "lucide-react";
+import { Search, Blocks, Menu, X, Compass, Pickaxe, Wallet, ArrowLeftRight, BarChart3, Network, User, Settings } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const NAV_ITEMS = [
   { to: "/dashboard", label: "Dashboard", icon: Blocks },
-  { to: "/explorer", label: "Explorer" },
-  { to: "/mining", label: "Mining" },
-  { to: "/wallet", label: "Wallet" },
-  { to: "/transactions", label: "Transactions" },
-  { to: "/analytics", label: "Analytics" },
-  { to: "/network", label: "Network" },
-  { to: "/profile", label: "Profile" },
-  { to: "/settings", label: "Settings" },
+  { to: "/explorer", label: "Explorer", icon: Compass },
+  { to: "/mining", label: "Mining", icon: Pickaxe },
+  { to: "/wallet", label: "Wallet", icon: Wallet },
+  { to: "/transactions", label: "Transactions", icon: ArrowLeftRight },
+  { to: "/analytics", label: "Analytics", icon: BarChart3 },
+  { to: "/network", label: "Network", icon: Network },
+  { to: "/profile", label: "Profile", icon: User },
+  { to: "/settings", label: "Settings", icon: Settings },
 ];
 
 export function AppHeader() {
@@ -68,6 +68,7 @@ export function AppHeader() {
                     }`
                   }
                 >
+                  <item.icon className="h-4 w-4 shrink-0" />
                   {item.label}
                 </NavLink>
               ))}

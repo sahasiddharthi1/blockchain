@@ -43,7 +43,7 @@ export default function Settings() {
       </div>
 
       <div className="rounded-xl border border-border bg-ink-card p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${
               connected ? "bg-success-soft text-success" : "bg-danger-soft text-danger"
@@ -66,7 +66,7 @@ export default function Settings() {
 
       {loggedIn ? (
         <div className="rounded-xl border border-border bg-ink-card p-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-signal-soft text-signal">
                 <User className="h-5 w-5" />

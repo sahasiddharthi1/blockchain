@@ -63,7 +63,7 @@ export default function MiningPage() {
 
   return (
     <div className="mx-auto max-w-7xl space-y-6">
-      <div className="animate-fade-in flex items-center justify-between">
+      <div className="animate-fade-in flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="bg-gradient-to-r from-signal to-accent-cyan bg-clip-text text-2xl font-bold tracking-tight text-transparent">
             Mining
