@@ -29,6 +29,8 @@ type User struct {
 type UserRepository interface {
 	Create(u *User) error
 	FindByEmail(email string) (*User, error)
+	FindByID(id string) (*User, error)
+	UpdatePassword(id, passwordHash string) error
 }
 
 // InMemoryUserStore is a mutex-guarded map-backed UserRepository.
@@ -70,4 +72,30 @@ func (s *InMemoryUserStore) FindByEmail(email string) (*User, error) {
 		return nil, fmt.Errorf("auth: no user with email %s", email)
 	}
 	return s.byID[id], nil
+}
+
+// FindByID returns a user by canonical ID, or an error if absent.
+func (s *InMemoryUserStore) FindByID(id string) (*User, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	user, ok := s.byID[id]
+	if !ok {
+		return nil, fmt.Errorf("auth: no user with id %s", id)
+	}
+	return user, nil
+}
+
+// UpdatePassword replaces the stored password hash for an existing user.
+// It returns an error if the id is unknown.
+func (s *InMemoryUserStore) UpdatePassword(id, passwordHash string) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	user, ok := s.byID[id]
+	if !ok {
+		return fmt.Errorf("auth: no user with id %s", id)
+	}
+	user.PasswordHash = passwordHash
+	return nil
 }

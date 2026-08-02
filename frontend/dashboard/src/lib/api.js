@@ -41,5 +41,13 @@ export const api = {
         method: "POST",
         body: JSON.stringify({ email, password }),
     }),
+    forgotPassword: (email) => request("/api/v1/auth/forgot-password", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+    }),
+    resetPassword: (token, newPassword) => request("/api/v1/auth/reset-password", {
+        method: "POST",
+        body: JSON.stringify({ token, new_password: newPassword }),
+    }),
     mineNow: () => request("/api/v1/mining/mine", { method: "POST" }),
 };

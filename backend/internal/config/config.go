@@ -24,6 +24,19 @@ type Config struct {
 	MongoDB          string
 	JWTSecret        string
 	MiningDifficulty int // required leading hex zeros in a valid block hash
+
+	// AppURL is the publicly reachable base URL of the dashboard; it's
+	// used to build password-reset links delivered by email.
+	AppURL string
+
+	// SMTP config for transactional email. When SMTPHost is empty the
+	// mailer falls back to logging reset links (development).
+	SMTPHost     string
+	SMTPPort     int
+	SMTPUser     string
+	SMTPPassword string
+	SMTPFrom     string
+	SMTPInsecure bool
 }
 
 // Load reads configuration from environment variables, applying sane
@@ -37,6 +50,13 @@ func Load() (*Config, error) {
 		MongoDB:          getEnv("LF_MONGO_DB", "ledgerforge"),
 		JWTSecret:        getEnv("LF_JWT_SECRET", ""),
 		MiningDifficulty: getEnvInt("LF_MINING_DIFFICULTY", 4),
+		AppURL:           getEnv("LF_APP_URL", "http://localhost:5173"),
+		SMTPHost:         getEnv("LF_SMTP_HOST", ""),
+		SMTPPort:         getEnvInt("LF_SMTP_PORT", 587),
+		SMTPUser:         getEnv("LF_SMTP_USER", ""),
+		SMTPPassword:     getEnv("LF_SMTP_PASS", ""),
+		SMTPFrom:         getEnv("LF_SMTP_FROM", "no-reply@ledgerforge.dev"),
+		SMTPInsecure:     getEnvBool("LF_SMTP_INSECURE", false),
 	}
 
 	if cfg.Env == "production" && cfg.JWTSecret == "" {
@@ -62,6 +82,18 @@ func getEnvInt(key string, fallback int) int {
 		return fallback
 	}
 	parsed, err := strconv.Atoi(v)
+	if err != nil {
+		return fallback
+	}
+	return parsed
+}
+
+func getEnvBool(key string, fallback bool) bool {
+	v, ok := os.LookupEnv(key)
+	if !ok || v == "" {
+		return fallback
+	}
+	parsed, err := strconv.ParseBool(v)
 	if err != nil {
 		return fallback
 	}

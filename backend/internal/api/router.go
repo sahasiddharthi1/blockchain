@@ -46,6 +46,8 @@ func NewRouter(h Handlers, jwtSecret, corsOrigin string) chi.Router {
 	r.Route("/api/v1", func(r chi.Router) {
 		r.Post("/auth/register", h.Auth.Register)
 		r.Post("/auth/login", h.Auth.Login)
+		r.Post("/auth/forgot-password", h.Auth.ForgotPassword)
+		r.Post("/auth/reset-password", h.Auth.ResetPassword)
 
 		// Explorer: public reads, no auth — a blockchain explorer is
 		// meant to be publicly browsable, same as any real chain

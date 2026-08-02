@@ -98,7 +98,17 @@ func main() {
 	miningSvc := mining.NewService(zlog, chain, pending, hub, chainPath)
 
 	userStore := auth.NewInMemoryUserStore() // see auth/user_store.go for the Mongo-swap seam
-	authSvc := auth.NewService(userStore, cfg.JWTSecret)
+	// Mailer: SMTP when configured (LF_SMTP_HOST), otherwise reset links
+	// are logged to stdout for local use — see auth/password_mailer.go.
+	mailer := auth.NewMailer(auth.MailOptions{
+		From:     cfg.SMTPFrom,
+		Host:     cfg.SMTPHost,
+		Port:     cfg.SMTPPort,
+		User:     cfg.SMTPUser,
+		Pass:     cfg.SMTPPassword,
+		Insecure: cfg.SMTPInsecure,
+	}, zlog.Infow)
+	authSvc := auth.NewService(userStore, cfg.JWTSecret, mailer, cfg.AppURL)
 
 	// --- Handlers + router -----------------------------------------------
 	h := api.Handlers{
